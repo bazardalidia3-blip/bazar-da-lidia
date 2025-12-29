@@ -1,63 +1,101 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 
 export default function BazarDaLidia() {
-  const whatsapps = ["41995503761", "41984188454"];
-  const [indice, setIndice] = useState(0);
+  const whatsapp = "41995503761";
 
-  const mensagem =
-    "Olá! Vim pelo site do Bazar da Lídia e gostaria de comprar um produto 😊";
+  const mensagem = (produto) =>
+    `Olá! Vim pelo site do Bazar da Lídia e gostaria de comprar: ${produto}`;
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setIndice((prev) => (prev + 1) % whatsapps.length);
-    }, 8000);
+  const produtos = [
+    {
+      id: 1,
+      nome: "Vestido Floral",
+      preco: "R$ 79,90",
+      categoria: "Roupas Femininas",
+      imagem: "https://via.placeholder.com/200",
+    },
+    {
+      id: 2,
+      nome: "Camiseta Masculina",
+      preco: "R$ 49,90",
+      categoria: "Roupas Masculinas",
+      imagem: "https://via.placeholder.com/200",
+    },
+    {
+      id: 3,
+      nome: "Tênis Infantil",
+      preco: "R$ 89,90",
+      categoria: "Infantil",
+      imagem: "https://via.placeholder.com/200",
+    },
+  ];
 
-    return () => clearInterval(interval);
-  }, []);
+  const categorias = [
+    "Roupas Femininas",
+    "Roupas Masculinas",
+    "Infantil",
+    "Calçados",
+    "Acessórios",
+  ];
 
   return (
-    <>
-      <div style={{ fontFamily: "Arial, sans-serif", padding: "20px" }}>
-        <h1>Bazar da Lídia</h1>
+    <div style={{ fontFamily: "Arial, sans-serif", padding: "20px" }}>
+      <h1>Bazar da Lídia</h1>
+      <p>
+        Moda feminina, masculina, infantil, calçados e acessórios com atendimento
+        direto pelo WhatsApp.
+      </p>
 
-        <p>
-          Moda feminina, masculina, infantil, calçados e acessórios com
-          atendimento direto pelo WhatsApp.
-        </p>
+      {categorias.map((categoria) => (
+        <div key={categoria}>
+          <h2>{categoria}</h2>
 
-        <h2>Categorias</h2>
-        <ul>
-          <li>Roupas Femininas</li>
-          <li>Roupas Masculinas</li>
-          <li>Infantil</li>
-          <li>Calçados</li>
-          <li>Acessórios</li>
-        </ul>
-      </div>
+          <div style={{ display: "flex", gap: "20px", flexWrap: "wrap" }}>
+            {produtos
+              .filter((p) => p.categoria === categoria)
+              .map((produto) => (
+                <div
+                  key={produto.id}
+                  style={{
+                    border: "1px solid #ddd",
+                    borderRadius: "8px",
+                    padding: "10px",
+                    width: "200px",
+                  }}
+                >
+                  <img
+                    src={produto.imagem}
+                    alt={produto.nome}
+                    style={{ width: "100%", borderRadius: "6px" }}
+                  />
 
-      {/* Botão flutuante */}
-      <a
-        href={`https://wa.me/${whatsapps[indice]}?text=${encodeURIComponent(
-          mensagem
-        )}`}
-        target="_blank"
-        rel="noreferrer"
-        style={{
-          position: "fixed",
-          bottom: "20px",
-          right: "20px",
-          backgroundColor: "#25d366",
-          color: "#fff",
-          padding: "15px 20px",
-          borderRadius: "50px",
-          fontWeight: "bold",
-          textDecoration: "none",
-          boxShadow: "0 4px 10px rgba(0,0,0,0.3)",
-          zIndex: 1000,
-        }}
-      >
-        WhatsApp
-      </a>
-    </>
+                  <h3>{produto.nome}</h3>
+                  <p>{produto.preco}</p>
+
+                  <a
+                    href={`https://wa.me/${whatsapp}?text=${encodeURIComponent(
+                      mensagem(produto.nome)
+                    )}`}
+                    target="_blank"
+                    rel="noreferrer"
+                    style={{
+                      display: "block",
+                      textAlign: "center",
+                      marginTop: "10px",
+                      padding: "8px",
+                      backgroundColor: "#25d366",
+                      color: "#fff",
+                      textDecoration: "none",
+                      borderRadius: "6px",
+                    }}
+                  >
+                    Comprar
+                  </a>
+                </div>
+              ))}
+          </div>
+        </div>
+      ))}
+    </div>
   );
 }
