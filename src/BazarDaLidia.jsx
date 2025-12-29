@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 
 export default function BazarDaLidia() {
   const whatsapps = ["41995503761", "41984188454"];
