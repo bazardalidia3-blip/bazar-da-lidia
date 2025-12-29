@@ -1,10 +1,14 @@
+import React, { useState } from "react";
+
 export default function BazarDaLidia() {
+  const [categoria, setCategoria] = useState("Todos");
+
   return (
     <div style={{ fontFamily: "Arial", padding: "20px" }}>
       <h1>Bazar da Lídia</h1>
       <p>
-        Moda feminina, masculina, infantil, calçados e acessórios com
-        atendimento direto pelo WhatsApp.
+        Moda feminina, masculina, infantil, calçados e acessórios com atendimento
+        direto pelo WhatsApp.
       </p>
 
       <h2>Categorias</h2>
