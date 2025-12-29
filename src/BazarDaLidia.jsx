@@ -12,7 +12,8 @@ export default function BazarDaLidia() {
       nome: "Vestido Floral",
       preco: "R$ 79,90",
       categoria: "Roupas Femininas",
-      imagem: "https://via.placeholder.com/200",
+      imagem: "imagem: "/imagens/vestido-floral.jpg",
+",
     },
     {
       id: 2,
